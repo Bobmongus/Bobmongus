@@ -1,0 +1,222 @@
+[
+    {
+        "id": "4a7e4f65-1e0c-4f9f-baaa-ee15e9d0ef0a",
+        "email": "gommin1@pos.idserve.net",
+        "password": "imgommin1!",
+        "icon": "bobmong",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": true,
+        "nickName": "Gommin",
+        "userAddress": "자취요~~"
+    },
+    {
+        "id": "a0c2557a-64e5-44ce-982b-bd01dce2b232",
+        "email": "jason1@pos.idserve.net",
+        "password": "jason1!",
+        "icon": "jjamong",
+        "isLogin": true,
+        "isReady": false,
+        "isMakingRoom": false,
+        "nickName": "Jason",
+        "userAddress": "언제나 C5"
+    },
+    {
+        "id": "388e1e72-07c7-4d51-a4cf-37877a5df815",
+        "email": "judy1@pos.idserve.net",
+        "password": "judy1!",
+        "icon": "thugmong",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": false,
+        "nickName": "Judy",
+        "userAddress": "xx역 근처!"
+    },
+    {
+        "id": "58a1a949-32cb-4652-a94c-6a9ea49f4ce3",
+        "email": "bigsun1@pos.idserve.net",
+        "password": "bigsun1!",
+        "icon": "bigsun",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": true,
+        "nickName": "BigSun",
+        "userAddress": "포스빌(C5 근처)"
+    },
+    {
+        "id": "deee8907-296e-4404-801b-b06289c63a76",
+        "email": "antony1@pos.idserve.net",
+        "password": "antony1!",
+        "icon": "antony",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": false,
+        "nickName": "Antony",
+        "userAddress": "포스빌입니다."
+    },
+    {
+        "id": "287ffb39-95f9-40a3-88f8-4bad04e38dec",
+        "email": "joon1@pos.idserve.net",
+        "password": "joon1!",
+        "icon": "joon",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": false,
+        "nickName": "Joon",
+        "userAddress": "포스빌 6동!"
+    },
+    {
+        "id": "9e80cfda-0d9b-4420-9f74-31e77710eb7f",
+        "email": "k1@pos.idserve.net",
+        "password": "k1!",
+        "icon": "k",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": false,
+        "nickName": "K",
+        "userAddress": "포항역 근처자취"
+    },
+    {
+        "id": "0e0e65a7-f198-4003-aaad-8448b3b78ad0",
+        "email": "louie1@pos.idserve.net",
+        "password": "louie1!",
+        "icon": "louie",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": false,
+        "nickName": "Louie",
+        "userAddress": "여자 생활관~"
+    },
+    {
+        "id": "f7aba304-860f-44a9-bc00-0bf2922e7f50",
+        "email": "swiftist1@pos.idserve.net",
+        "password": "swiftist1!",
+        "icon": "jjamong",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": true,
+        "nickName": "Swiftist",
+        "userAddress": "포스빌 6동~"
+    },
+    {
+        "id": "83fea9eb-efea-4c4b-a1ed-9edbf171c9ad",
+        "email": "tamna9891@pos.idserve.net",
+        "password": "tamna9891!",
+        "icon": "tamna",
+        "isLogin": false,
+        "isReady": false,
+        "isMakingRoom": false,
+        "nickName": "Tamna",
+        "userAddress": "포스빌506호"
+    },
+    {
+        "id": "38e321eb-cfd6-4b09-b350-831d7a9dedcc",
+        "email": "qqqq@pos.idserve.net",
+        "password": "qqqq",
+        "icon": "jjamong",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": true,
+        "nickName": "Nara",
+        "userAddress": "포스빌 5동!"
+    },
+    {
+        "id": "221caaa4-2a4e-4c58-be8b-9ed3070404ba",
+        "email": "wwww@pos.idserve.net",
+        "password": "wwww",
+        "icon": "usmong",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": true,
+        "nickName": "WoW",
+        "userAddress": "생활관 여"
+    },
+    {
+        "id": "686a50d7-e758-4790-ad40-84d8dfe84a96",
+        "email": "eeee@pos.idserve.net",
+        "password": "eeee",
+        "icon": "bobmong",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": false,
+        "nickName": "OhYeah",
+        "userAddress": "생활관 여"
+    },
+    {
+        "id": "805255ae-67f6-4944-a505-056da9ac00ad",
+        "email": "rrrr@pos.idserve.net",
+        "password": "rrrrr",
+        "icon": "angelmong",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": true,
+        "nickName": "BobBob",
+        "userAddress": "포스빌6동"
+    },
+    {
+        "id": "5582abae-fc01-4192-bff8-a2edfc9e5043",
+        "email": "tttt@pos.idserve.net",
+        "password": "tttt",
+        "icon": "thugmong",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": true,
+        "nickName": "Hoho",
+        "userAddress": "생활관(남)"
+    },
+    {
+        "id": "80106bab-4601-440d-b630-8d95f6e59355",
+        "email": "yyyy@pos.idserve.net",
+        "password": "yyyy",
+        "icon": "jjamong",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": true,
+        "nickName": "Pop",
+        "userAddress": "포오스으빌6"
+    },
+    {
+        "id": "d46fa6be-86fd-463d-ad2e-aa8aacbb13bd",
+        "email": "uuuu@pos.idserve.net",
+        "password": "uuuu",
+        "icon": "bobmong",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": false,
+        "nickName": "Magic",
+        "userAddress": "포스빌 6!"
+    },
+    {
+        "id": "2795c6f5-69d6-40ad-a4a5-2998683822ab",
+        "email": "popo@pos.idserve.net",
+        "password": "popo",
+        "icon": "jjamong",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": true,
+        "nickName": "Zoro",
+        "userAddress": "포스빌5동임용"
+    },
+    {
+        "id": "37e98a3b-7f8d-4601-84cb-fd31e3923cd2",
+        "email": "aaaa@pos.idserve.net",
+        "password": "aaaa",
+        "icon": "jjamong",
+        "isLogin": true,
+        "isReady": true,
+        "isMakingRoom": true,
+        "nickName": "Dragon",
+        "userAddress": "생활관(남)"
+    },
+    {
+        "id": "1b67d2da-3600-40be-b035-b5726cb73bef",
+        "email": "123",
+        "password": "123",
+        "icon": "usmong",
+        "isLogin": false,
+        "isReady": false,
+        "isMakingRoom": false,
+        "nickName": "운영진",
+        "userAddress": "C5"
+    }
+]
