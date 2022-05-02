@@ -11,4 +11,5 @@ class RoomListSerializer(serializers.ModelSerializer):
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
-        fields = '__all__'
+        # fields = '__all__'
+        fields = ('roomtitle', 'roomdetail','endtime', 'roomTimeStr', 'linkURL')

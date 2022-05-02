@@ -8,8 +8,8 @@ class Room(models.Model):
     isStart = models.BooleanField(default=False)
     roomtitle = models.CharField(max_length=50)
     roomdetail = models.CharField(max_length=300)
-    nowpersons = models.TextField()
-    persons = models.IntegerField()
+    persons = models.IntegerField(default=0)
     endtime = models.DateField()
     linkURL = models.TextField()
     roomTimeStr = models.DateField()
+

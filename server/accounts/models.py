@@ -17,6 +17,7 @@ class User(AbstractUser):
     isMakingRoom = models.BooleanField(default=False)    
     refreshToken = models.TextField()
     nickname = models.CharField(max_length=10)
+    enteredRoom = models.IntegerField(default=0)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
@@ -24,3 +25,4 @@ class User(AbstractUser):
 
     # def __str__(self):
     #     return self.email
+    # 생각해보니까. 그냥 들어가 있는 방의 pk만 알면 될듯?
