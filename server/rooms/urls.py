@@ -5,4 +5,5 @@ urlpatterns = [
     path('createroom', RoomCreateView.as_view()),
     path('ready', ReadyView.as_view()),
     path('enterroom', EnterRoomView.as_view()),
+    
 ]
