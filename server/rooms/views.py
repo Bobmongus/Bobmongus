@@ -13,6 +13,7 @@ from .serializers import RoomSerializer
 from .models import Room
 # import simplejson as json
 
+# 방 생성 -> 방 생성여부 true, 방 유저 목록 추가. 방 인원수 1
 class RoomCreateView(APIView):
     def post(self, request):
         access_token = request.headers.get("access-token")
@@ -64,7 +65,8 @@ class RoomCreateView(APIView):
             }
             response.status_code = status.HTTP_200_OK
             return response
-            
+
+# 레디 -> 레디여부 true
 class ReadyView(APIView):
     def post(self, request):
         access_token = request.headers.get("access-token")
@@ -107,7 +109,7 @@ class ReadyView(APIView):
         return response
 
 
-
+# 방 들어갈때 -> 방 유저 추가. 방 현재 인원수 +1
 class EnterRoomView(APIView):
     def post(self, request):
         access_token = request.headers.get("access-token")
@@ -131,6 +133,10 @@ class EnterRoomView(APIView):
         user.enteredRoom = roompk
         user.save()
         users = get_user_model().objects.filter(enteredRoom=roompk).values("id","email","password","image","isReady","isMakingRoom","nickname","enteredRoom")
+        room = Room.objects.filter(pk = roompk).first()
+        room.persons = room.persons + 1
+        room.save()
+        
         response = Response()
         response.headers = {
             'access_token':new_access_token,
@@ -142,3 +148,144 @@ class EnterRoomView(APIView):
         response.status_code = status.HTTP_200_OK
         return response
 
+# 방 나갈때 -> 레디 풀기, 방 유저에서 없애기, 방 생성여부 false로 바꾸기. 유저 0명일땐 방 폭파시키기.
+class ExitRoom(APIView):
+    def post(self, request):
+        access_token = request.headers.get("access-token")
+        refresh_token = request.headers.get("refresh-token")
+        pk = request.data['pk']
+        user = get_object_or_404(get_user_model(), pk=pk)
+        new_access_token, checkError = CheckToken(access_token,refresh_token,int(pk))
+
+        if checkError:
+            user.refreshToken = ''
+            user.save()
+            response = Response()
+            response.data = { 
+                'message' : 'failed',
+                'detail': 'Token Error',
+            }
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            return response
+        
+        user.isReady = False
+        user.enteredRoom = 0
+        user.isMakingRoom = False
+        roompk = request.data['roompk']
+        room = Room.objects.filter(pk = roompk).first()
+        room.persons = room.persons - 1
+        if room.persons == 0:
+            room.delete()
+        else:
+            room.save()
+        user.save()
+        response = Response()
+        response.headers = {
+            'access_token':new_access_token,
+        }
+        response.data = {
+            'message' : 'success'
+        }
+        response.status_code = status.HTTP_200_OK
+        return response
+
+
+class GetRoomList(APIView):
+    def get(self, request):
+        access_token = request.headers.get("access-token")
+        refresh_token = request.headers.get("refresh-token")
+        pk = request.GET['pk']
+        user = get_object_or_404(get_user_model(), pk=pk)
+        new_access_token, checkError = CheckToken(access_token,refresh_token,int(pk))
+
+        if checkError:
+            user.refreshToken = ''
+            user.save()
+            response = Response()
+            response.data = { 
+                'message' : 'failed',
+                'detail': 'Token Error',
+            }
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            return response
+        
+        rooms = Room.objects.all().values("isStart", "pk", "roomtitle", "persons", "endtime", "roomTimeStr")
+        response = Response()
+        response.headers = {
+            'access_token':new_access_token,
+        }
+        response.data = {
+            'message' : 'success',
+            'data': rooms
+        }
+        response.status_code = status.HTTP_200_OK
+        return response
+
+class GetRoomDetail(APIView):
+    def get(self, request):
+        access_token = request.headers.get("access-token")
+        refresh_token = request.headers.get("refresh-token")
+        pk = request.GET['pk']
+        user = get_object_or_404(get_user_model(), pk=pk)
+        new_access_token, checkError = CheckToken(access_token,refresh_token,int(pk))
+
+        if checkError:
+            user.refreshToken = ''
+            user.save()
+            response = Response()
+            response.data = { 
+                'message' : 'failed',
+                'detail': 'Token Error',
+            }
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            return response
+        roompk = request.GET['roompk']
+        room = Room.objects.filter(pk = roompk).first()
+        response = Response()
+        response.headers = {
+            'access_token':new_access_token,
+        }
+        response.data = {
+            'message' : 'success',
+            'data': {
+                "pk":room.pk,
+                "isStart": room.isStart,
+                "roomtitle": room.roomtitle,
+                "roomdetail": room.roomdetail,
+                "persons": room.persons,
+                "endtime": room.endtime,
+                "roomTimeStr": room.roomTimeStr
+            }
+        }
+        response.status_code = status.HTTP_200_OK
+        return response
+
+class GetRoomUsers(APIView):
+    def get(self, request):
+        access_token = request.headers.get("access-token")
+        refresh_token = request.headers.get("refresh-token")
+        pk = request.GET['pk']
+        user = get_object_or_404(get_user_model(), pk=pk)
+        new_access_token, checkError = CheckToken(access_token,refresh_token,int(pk))
+
+        if checkError:
+            user.refreshToken = ''
+            user.save()
+            response = Response()
+            response.data = { 
+                'message' : 'failed',
+                'detail': 'Token Error',
+            }
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            return response
+        roompk = request.GET['roompk']
+        users = get_user_model().objects.filter(enteredRoom=roompk).values("id","email","password","image","isReady","isMakingRoom","nickname","enteredRoom")
+        response = Response()
+        response.headers = {
+            'access_token':new_access_token,
+        }
+        response.data = {
+            'message' : 'success',
+            'data': users
+        }
+        return response
