@@ -239,6 +239,94 @@ class DeleteView(APIView):
         return response
 
 
+# 비밀번호 변경 (로그인 후)
+class ChangePasswordView(APIView):
+    # 비밀번호 일치 여부 확인
+    def get(self, request):
+        password = request.GET['password']
+        access_token = request.headers.get("access-token")
+        refresh_token = request.headers.get("refresh-token")
+        pk = request.GET['pk']
+        new_access_token, checkError = CheckToken(access_token,refresh_token,int(pk))
+        user = User.objects.filter(pk=pk).first()
+        
+        if checkError:
+            user.refreshToken = ''
+            user.save()
+            response = Response()
+            response.data = { 
+                'message' : 'failed',
+                'detail': 'Token Error',
+            }
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            return response
+
+        
+        if user is None:
+            response = Response()
+            response.data = { 
+                'message' : 'failed',
+                'detail': 'User not found',
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        response = Response()
+        
+        response.headers = {
+            'access_token':new_access_token,
+        }
+        # print('여기?')
+        if user.password == password:
+            response.data = { 
+            'message' : 'success',
+            }
+            response.status_code = status.HTTP_200_OK
+        else:
+            response.data = { 
+            'message' : 'failed',
+            }
+            response.status_code = status.HTTP_400_BAD_REQUEST
+        return response
+
+
+    def post(self, request):
+        access_token = request.headers.get("access-token")
+        refresh_token = request.headers.get("refresh-token")
+        pk = request.data['pk']
+        new_access_token, checkError = CheckToken(access_token,refresh_token,int(pk))
+        user = User.objects.filter(pk=pk).first()
+        if checkError:
+            user.refreshToken = ''
+            user.save()
+            response = Response()
+            response.data = { 
+                'message' : 'failed',
+                'detail': 'Token Error',
+            }
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            return response
+        if user is None:
+            response = Response()
+            response.data = { 
+                'message' : 'failed',
+                'detail': 'User not found',
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        new_password = request.data['password']
+        user.password = new_password
+        user.save()
+        response = Response()
+        response.headers = {
+            'access_token':new_access_token,
+        }
+        response.data = { 
+            'message' : 'success',
+        }
+        response.status_code = status.HTTP_200_OK
+        return response
+
+
 # from django.shortcuts import render
 # from distutils.command.config import config
 # import email

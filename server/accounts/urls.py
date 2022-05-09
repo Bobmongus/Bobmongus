@@ -1,6 +1,6 @@
 from django.urls import path , include
 # from . import views
-from .views import EmailCheckView,ResetPasswordView,RegisterView,LoginView,LogoutView,ChangeProfileImageView, DeleteView
+from .views import EmailCheckView,ResetPasswordView,RegisterView,LoginView,LogoutView,ChangeProfileImageView, DeleteView, ChangePasswordView
 
 urlpatterns = [
     # path('', include('dj_rest_auth.urls')),
@@ -17,6 +17,7 @@ urlpatterns = [
     path('logout', LogoutView.as_view()),
 
     path('changeprofileimage', ChangeProfileImageView.as_view()),
-    path('deleteuser', DeleteView.as_view())
-
+    path('deleteuser', DeleteView.as_view()),
+    
+    path('changepassword', ChangePasswordView.as_view()),
 ]

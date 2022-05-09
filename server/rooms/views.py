@@ -289,3 +289,54 @@ class GetRoomUsers(APIView):
             'data': users
         }
         return response
+
+
+class StartRoomView(APIView):
+    def post(self, request):
+        access_token = request.headers.get("access-token")
+        refresh_token = request.headers.get("refresh-token")
+        pk = request.data['pk']
+        user = get_object_or_404(get_user_model(), pk=pk)
+        new_access_token, checkError = CheckToken(access_token,refresh_token,int(pk))
+
+        if checkError:
+            user.refreshToken = ''
+            user.save()
+            response = Response()
+            response.data = { 
+                'message' : 'failed',
+                'detail': 'Token Error',
+            }
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            return response
+        roompk = request.data['roompk']
+        room = Room.objects.filter(user_id = pk).first()
+        response = Response()
+        if room != None:
+            room.isStart = True
+            room.save()
+            response.headers = {
+            'access_token':new_access_token,
+            }
+            response.data = {
+                'message' : 'success',
+                'data': {
+                    "pk":room.pk,
+                    "isStart": room.isStart,
+                    "roomtitle": room.roomtitle,
+                    "roomdetail": room.roomdetail,
+                    "persons": room.persons,
+                    "endtime": room.endtime,
+                    "roomTimeStr": room.roomTimeStr
+                }
+            }
+            response.status_code = status.HTTP_200_OK
+            return response
+        response.response.headers = {
+            'access_token':new_access_token,
+            }
+        response.data = {
+            'message' : 'failed',
+        }
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        return response
