@@ -14,6 +14,7 @@
 		0EE83C2927FD5E5A00940397 /* bobmongusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE83C2827FD5E5A00940397 /* bobmongusTests.swift */; };
 		0EE83C3327FD5E5A00940397 /* bobmongusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE83C3227FD5E5A00940397 /* bobmongusUITests.swift */; };
 		0EE83C3527FD5E5A00940397 /* bobmongusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE83C3427FD5E5A00940397 /* bobmongusUITestsLaunchTests.swift */; };
+		11286926282A0FB1002BA764 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11286925282A0FB1002BA764 /* SplashView.swift */; };
 		364600A12806C73E00A75E16 /* login-logo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 364600A02806C73E00A75E16 /* login-logo.gif */; };
 		364600A32806C80700A75E16 /* logo-login-shadow.gif in Resources */ = {isa = PBXBuildFile; fileRef = 364600A22806C80700A75E16 /* logo-login-shadow.gif */; };
 		364600A52806C9DC00A75E16 /* GifImage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364600A42806C9DC00A75E16 /* GifImage2.swift */; };
@@ -89,6 +90,7 @@
 		0EE83C2E27FD5E5A00940397 /* bobmongusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bobmongusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EE83C3227FD5E5A00940397 /* bobmongusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bobmongusUITests.swift; sourceTree = "<group>"; };
 		0EE83C3427FD5E5A00940397 /* bobmongusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bobmongusUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		11286925282A0FB1002BA764 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		364600A02806C73E00A75E16 /* login-logo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "login-logo.gif"; sourceTree = "<group>"; };
 		364600A22806C80700A75E16 /* logo-login-shadow.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "logo-login-shadow.gif"; sourceTree = "<group>"; };
 		364600A42806C9DC00A75E16 /* GifImage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifImage2.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 		962787A82803F7CF00385549 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				11286925282A0FB1002BA764 /* SplashView.swift */,
 				96C0815D2805ABBF003532C3 /* EntranceView.swift */,
 				96C081602805AC2C003532C3 /* LoginView.swift */,
 				96C081622805AC4E003532C3 /* PrivacyPolicyView.swift */,
@@ -480,6 +483,7 @@
 				96D6977C2805659900400EB1 /* MypageView.swift in Sources */,
 				962787B02803F83900385549 /* ClearButton.swift in Sources */,
 				96C081632805AC4E003532C3 /* PrivacyPolicyView.swift in Sources */,
+				11286926282A0FB1002BA764 /* SplashView.swift in Sources */,
 				96C081612805AC2C003532C3 /* LoginView.swift in Sources */,
 				96C081712805CD96003532C3 /* AuthenticationView.swift in Sources */,
 				962787B32803F85700385549 /* ConfirmationDialog.swift in Sources */,

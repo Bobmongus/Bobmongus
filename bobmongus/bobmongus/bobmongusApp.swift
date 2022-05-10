@@ -14,8 +14,8 @@ struct bobmongusApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(modelData)
+            // 앱을 처음 실행하면 SplashView()를 보여준다.
+                        SplashView()
         }
     }
 }
