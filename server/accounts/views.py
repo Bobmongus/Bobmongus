@@ -105,6 +105,7 @@ class LoginView(APIView):
         refresh_token = jwt.encode(refresh_payload, 'secret', algorithm='HS256')
 
         user.refreshToken = refresh_token
+        user.isLogin = True
         user.save()
         
         response = Response()
@@ -117,6 +118,11 @@ class LoginView(APIView):
             'userid' : user.pk,
             'nickname' : user.nickname,
             'email': user.email,
+            'image': user.image,
+            'isReady': user.isReady,
+            'isLogin': user.isLogin,
+            'isMakingRoom': user.isMakingRoom,
+            'enteredRoom': user.enteredRoom
         }
         response.status_code = status.HTTP_202_ACCEPTED
         print(access_token)
@@ -128,6 +134,7 @@ class LogoutView(APIView):
         email = request.data['email']
         user = get_object_or_404(get_user_model(), email=email)
         user.refreshToken = ""
+        user.isLogin = False
         user.save()
         response = Response()
         response.data = {
