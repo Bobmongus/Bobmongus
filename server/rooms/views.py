@@ -13,12 +13,15 @@ from .serializers import RoomSerializer
 from .models import Room
 # import simplejson as json
 
+from django.utils import timezone
+from datetime import timedelta
+
+
 # 방 생성 -> 방 생성여부 true, 방 유저 목록 추가. 방 인원수 1
 class RoomCreateView(APIView):
     def post(self, request):
         access_token = request.headers.get("access-token")
         refresh_token = request.headers.get("refresh-token")
-
 
         pk = request.data['pk']
         # user = User.objects.filter(pk=pk).first()
@@ -44,11 +47,14 @@ class RoomCreateView(APIView):
             }
             response.status_code = status.HTTP_401_UNAUTHORIZED
             return response
-        
+        print(request.data)
         serializer = RoomSerializer(data=request.data)
-        # print("통과?")
+        print("통과?")
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=user)
+            nowtime = timezone.now()
+            settime = int(request.data['settingTime'])
+            endtime = nowtime + timedelta(minutes=settime)
+            serializer.save(user=user, endtime=endtime, roomTimeStr = nowtime)
             room = Room.objects.filter(user_id = pk).first()
             room.persons = 1
             room.save()
@@ -134,18 +140,34 @@ class EnterRoomView(APIView):
         user.save()
         users = get_user_model().objects.filter(enteredRoom=roompk).values("id","email","password","image","isReady","isMakingRoom","nickname","enteredRoom")
         room = Room.objects.filter(pk = roompk).first()
-        room.persons = room.persons + 1
-        room.save()
+
         
+        # 인원수 다 찬 방에 들어가려고 할때.
         response = Response()
         response.headers = {
             'access_token':new_access_token,
         }
+        # if room.persons
+        if room:
+            if room.personlimit > room.persons:
+                room.persons = room.persons + 1
+                room.save()
+                response.data = {
+                    'message' : 'success',
+                    'roomusers': users
+                }
+                response.status_code = status.HTTP_200_OK
+                return response
+            response.data = {
+                'message' : 'failed',
+            }
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            return response
+        
         response.data = {
-            'message' : 'success',
-            'roomusers': users
+            'message' : 'failed'
         }
-        response.status_code = status.HTTP_200_OK
+        response.status_code = status.HTTP_400_BAD_REQUEST
         return response
 
 # 방 나갈때 -> 레디 풀기, 방 유저에서 없애기, 방 생성여부 false로 바꾸기. 유저 0명일땐 방 폭파시키기.
@@ -208,8 +230,14 @@ class GetRoomList(APIView):
             }
             response.status_code = status.HTTP_401_UNAUTHORIZED
             return response
-        
+        nowtime = timezone.now()
+        rooms = Room.objects.filter(endtime__lt = nowtime)
+        rooms.delete()
         rooms = Room.objects.all().values("isStart", "pk", "roomtitle", "persons", "endtime", "roomTimeStr")
+        # 해당 방의 남은 시간 보내주기.
+        for i in range(len(rooms)):
+            rooms[i]["remainTime"] = ((rooms[i].get("endtime") - nowtime)).seconds//60
+        
         response = Response()
         response.headers = {
             'access_token':new_access_token,
@@ -310,7 +338,7 @@ class StartRoomView(APIView):
             response.status_code = status.HTTP_401_UNAUTHORIZED
             return response
         roompk = request.data['roompk']
-        room = Room.objects.filter(user_id = pk).first()
+        room = Room.objects.filter(pk = roompk).first()
         response = Response()
         if room != None:
             room.isStart = True

@@ -12,4 +12,4 @@ class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         # fields = '__all__'
-        fields = ('roomtitle', 'roomdetail','endtime', 'roomTimeStr', 'linkURL')
+        fields = ('roomtitle', 'roomdetail', 'linkURL', 'personlimit')

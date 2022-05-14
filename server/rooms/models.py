@@ -9,7 +9,8 @@ class Room(models.Model):
     roomtitle = models.CharField(max_length=50)
     roomdetail = models.CharField(max_length=300)
     persons = models.IntegerField(default=0)
-    endtime = models.DateField()
+    personlimit = models.IntegerField(default=0)
+    endtime = models.DateTimeField()
     linkURL = models.TextField()
-    roomTimeStr = models.DateField()
+    roomTimeStr = models.DateTimeField()
 
